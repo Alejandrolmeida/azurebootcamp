@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "AzureRM", "AzureRM\AzureRM.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "migAz", "migAz\migAz.pssproj", "{3FA51B41-5B56-4425-BDBF-8D39382CADCA}"
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "Extra", "Extra\Extra.pssproj", "{F58E9633-C721-4753-AAD0-653455FBFCE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FA51B41-5B56-4425-BDBF-8D39382CADCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FA51B41-5B56-4425-BDBF-8D39382CADCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FA51B41-5B56-4425-BDBF-8D39382CADCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FA51B41-5B56-4425-BDBF-8D39382CADCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F58E9633-C721-4753-AAD0-653455FBFCE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F58E9633-C721-4753-AAD0-653455FBFCE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F58E9633-C721-4753-AAD0-653455FBFCE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F58E9633-C721-4753-AAD0-653455FBFCE8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://alejandrolmeida.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = AzureRM\\AzureRM.pssproj
+		SccProjectName1 = AzureRM
+		SccLocalPath1 = AzureRM
+		SccProjectUniqueName2 = migAz\\migAz.pssproj
+		SccProjectName2 = migAz
+		SccLocalPath2 = migAz
+		SccProjectUniqueName3 = Extra\\Extra.pssproj
+		SccProjectName3 = Extra
+		SccLocalPath3 = Extra
+	EndGlobalSection
+EndGlobal

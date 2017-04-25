@@ -1,0 +1,217 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2015-06-15",
+      "name": "alonecorpv2",
+      "location": "northeurope",
+      "tags": {
+        "migAz": "00000000-0000-0000-000000000000"
+      },
+      "properties": {
+        "accountType": "Standard_LRS"
+      }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2015-06-15",
+      "name": "AloneCorp",
+      "location": "northeurope",
+      "tags": {
+        "migAz": "52ba4172-12e8-4b33-a86f-967b25e14e43"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "dnsSettings": {
+          "domainNameLabel": "alonecorpv2"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/loadBalancers",
+      "apiVersion": "2015-06-15",
+      "name": "AloneCorp",
+      "location": "northeurope",
+      "tags": {
+        "migAz": "00000000-0000-0000-000000000000"
+      },
+      "dependsOn": [
+        "[concat(resourceGroup().id, '/providers/Microsoft.Network/publicIPAddresses/AloneCorp')]"
+      ],
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "default",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/publicIPAddresses/AloneCorp')]"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "default"
+          }
+        ],
+        "inboundNatRules": [
+          {
+            "name": "Alone-VM01-HTTP",
+            "properties": {
+              "frontendPort": 80,
+              "backendPort": 80,
+              "enableFloatingIP": false,
+              "idleTimeoutInMinutes": 4,
+              "protocol": "tcp",
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/loadBalancers/AloneCorp/frontendIPConfigurations/default')]"
+              }
+            }
+          },
+          {
+            "name": "Alone-VM01-HTTPS",
+            "properties": {
+              "frontendPort": 443,
+              "backendPort": 443,
+              "enableFloatingIP": false,
+              "idleTimeoutInMinutes": 4,
+              "protocol": "tcp",
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/loadBalancers/AloneCorp/frontendIPConfigurations/default')]"
+              }
+            }
+          },
+          {
+            "name": "Alone-VM01-PowerShell",
+            "properties": {
+              "frontendPort": 5986,
+              "backendPort": 5986,
+              "enableFloatingIP": false,
+              "idleTimeoutInMinutes": 4,
+              "protocol": "tcp",
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/loadBalancers/AloneCorp/frontendIPConfigurations/default')]"
+              }
+            }
+          },
+          {
+            "name": "Alone-VM01-RemoteDesktop",
+            "properties": {
+              "frontendPort": 57186,
+              "backendPort": 3389,
+              "enableFloatingIP": false,
+              "idleTimeoutInMinutes": 4,
+              "protocol": "tcp",
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/loadBalancers/AloneCorp/frontendIPConfigurations/default')]"
+              }
+            }
+          }
+        ],
+        "loadBalancingRules": [],
+        "probes": []
+      }
+    },
+    {
+      "type": "Microsoft.Compute/availabilitySets",
+      "apiVersion": "2015-06-15",
+      "name": "AloneCorp",
+      "location": "northeurope",
+      "tags": {
+        "migAz": "00000000-0000-0000-000000000000"
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2015-06-15",
+      "name": "Alone-VM01",
+      "location": "northeurope",
+      "tags": {
+        "migAz": "00000000-0000-0000-000000000000"
+      },
+      "dependsOn": [
+        "[concat(resourceGroup().id, '/providers/Microsoft.Network/loadBalancers/AloneCorp')]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "/subscriptions/317e28f4-8f41-4885-961f-2eb912058ed0/resourceGroups/AloneCorp-migAz/providers/Microsoft.Network/virtualNetworks/AloneVNet/subnets/default"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/loadBalancers/AloneCorp/backendAddressPools/default')]"
+                }
+              ],
+              "loadBalancerInboundNatRules": [
+                {
+                  "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/loadBalancers/AloneCorp/inboundNatRules/Alone-VM01-HTTP')]"
+                },
+                {
+                  "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/loadBalancers/AloneCorp/inboundNatRules/Alone-VM01-HTTPS')]"
+                },
+                {
+                  "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/loadBalancers/AloneCorp/inboundNatRules/Alone-VM01-PowerShell')]"
+                },
+                {
+                  "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/loadBalancers/AloneCorp/inboundNatRules/Alone-VM01-RemoteDesktop')]"
+                }
+              ]
+            }
+          }
+        ],
+        "enableIPForwarding": false
+      }
+    },
+    {
+      "resources": [],
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2015-06-15",
+      "name": "Alone-VM01",
+      "location": "northeurope",
+      "tags": {
+        "migAz": "52ba4172-12e8-4b33-a86f-967b25e14e43"
+      },
+      "dependsOn": [
+        "[concat(resourceGroup().id, '/providers/Microsoft.Network/networkInterfaces/Alone-VM01')]",
+        "[concat(resourceGroup().id, '/providers/Microsoft.Compute/availabilitySets/AloneCorp')]"
+      ],
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_A1"
+        },
+        "availabilitySet": {
+          "id": "[concat(resourceGroup().id, '/providers/Microsoft.Compute/availabilitySets/AloneCorp')]"
+        },
+        "storageProfile": {
+          "osDisk": {
+            "name": "alonecorp-WEB-OSDisk",
+            "osType": "Windows",
+            "vhd": {
+              "uri": "https://alonecorpv2.blob.core.windows.net/vhds/alonecorp-WEB-OSDisk.vhd"
+            },
+            "caching": "ReadWrite",
+            "createOption": "Attach"
+          },
+          "dataDisks": []
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/networkInterfaces/Alone-VM01')]",
+              "properties": {
+                "primary": true
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

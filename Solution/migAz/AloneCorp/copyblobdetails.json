@@ -1,0 +1,19 @@
+[
+  {
+    "SourceEnvironment": "AzureCloud",
+    "SourceSA": "alonecorp",
+    "SourceContainer": "vhds",
+    "SourceBlob": "alonecorp-WEB-OSDisk.vhd",
+    "SourceKey": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX==",
+    "DestinationSA": "alonecorpv2",
+    "DestinationContainer": "vhds",
+    "DestinationBlob": "alonecorp-WEB-OSDisk.vhd",
+    "DestinationKey": "",
+    "Status": "",
+    "TotalBytes": 0,
+    "BytesCopied": 0,
+    "StartTime": "",
+    "EndTime": "",
+    "SnapshotTime": ""
+  }
+]

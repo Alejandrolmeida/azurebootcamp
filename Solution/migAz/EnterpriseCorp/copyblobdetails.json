@@ -1,0 +1,36 @@
+[
+  {
+    "SourceEnvironment": "AzureCloud",
+    "SourceSA": "enterprisecorp",
+    "SourceContainer": "vhds",
+    "SourceBlob": "j5biva0c.ghm201704201631280167.vhd",
+    "SourceKey": "KuHXwB9LZSfkak6rlcyrDJiC+13CieNbEJvkzFENKQxY7AgcauraYmB7CFfpU6wHWXh0Lc39rWpwzYIzEJsyPw==",
+    "DestinationSA": "enterprisecorpv2",
+    "DestinationContainer": "vhds",
+    "DestinationBlob": "j5biva0c.ghm201704201631280167.vhd",
+    "DestinationKey": "",
+    "Status": "",
+    "TotalBytes": 0,
+    "BytesCopied": 0,
+    "StartTime": "",
+    "EndTime": "",
+    "SnapshotTime": ""
+  },
+  {
+    "SourceEnvironment": "AzureCloud",
+    "SourceSA": "enterprisecorp",
+    "SourceContainer": "vhds",
+    "SourceBlob": "o2hrqtf5.tgw201704201705160426.vhd",
+    "SourceKey": "KuHXwB9LZSfkak6rlcyrDJiC+13CieNbEJvkzFENKQxY7AgcauraYmB7CFfpU6wHWXh0Lc39rWpwzYIzEJsyPw==",
+    "DestinationSA": "enterprisecorpv2",
+    "DestinationContainer": "vhds",
+    "DestinationBlob": "o2hrqtf5.tgw201704201705160426.vhd",
+    "DestinationKey": "",
+    "Status": "",
+    "TotalBytes": 0,
+    "BytesCopied": 0,
+    "StartTime": "",
+    "EndTime": "",
+    "SnapshotTime": ""
+  }
+]
